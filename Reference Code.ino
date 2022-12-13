@@ -1,23 +1,20 @@
-void setup() {
-  // put your setup code here, to run once:
-  //initialising variables where the readings from the emg wil be stored
-  int EMGval=0; 
-
-
-
   // Setting names for each of the Pins in analogue in 
-  int EMGin=A0;
+const int EMGin=0;
+  //initialising variables where the readings from the emg wil be stored
+float EMGval=0; 
+float mv=0;
 
-  // Putting all of the pins for input
-  PinMode(EMGin,input)
-
-
+void setup() {
   Serial.begin(9600);
+  // Putting pin A0 as an input 
+  pinMode(EMGin,INPUT);
+
 }
 
 void loop() {
-  EMGval=Serial.read(EMGin)
-  Serial.println(EMGval)
-  // put your main code here, to run repeatedly:
+  EMGval=analogRead(EMGin);
+  mv=((EMGval/1023)*5);
+  Serial.print ("actual value :  ");Serial.println(EMGval);
+  Serial.print ("reading in mv:  ");Serial.println(mv);
 
 }
