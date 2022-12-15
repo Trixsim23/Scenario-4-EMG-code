@@ -28,11 +28,11 @@ void loop() {
     EMGleftval=analogRead(A1);
     EMGrightval=analogRead(A2);
     //plotting everything on one graph 
-    Serial.print(EMGVal);
+    //Serial.print(EMGVal);
     Serial.print(",");
-    Serial.print((EMGleftval+2046));
+    Serial.print(EMGleftval);
     Serial.print(",");
-    Serial.println((EMGrightval+1023));
+    Serial.println(EMGrightval);
   
 
     if (EMGVal > EMGclick) {
@@ -40,11 +40,11 @@ void loop() {
       delay(100);
     }
     if (EMGleftval > EMGleft){
-      //Mouse.move(-40,0);
+      Mouse.move(-40,0);
       delay(100);
     } 
     if(EMGrightval > EMGright){
-      //Mouse.move(40,0);
+      Mouse.move(40,0);
       delay(100);
     }
 
