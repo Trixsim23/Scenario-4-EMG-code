@@ -28,9 +28,11 @@ void loop() {
     EMGleftval=analogRead(A1);
     EMGrightval=analogRead(A2);
     //plotting everything on one graph 
-    Serial.println(EMGVal);
+    Serial.print(EMGVal);
+    Serial.print(",");
     Serial.print((EMGleftval+2046));
-    Serial.print((EMGrightval+1023));
+    Serial.print(",");
+    Serial.println((EMGrightval+1023));
   
 
     if (EMGVal > EMGclick) {
@@ -48,7 +50,7 @@ void loop() {
 
   }
   else {Serial.println("Goodbye!");
-  Serial.print("SAFETY FEATURE ON PLEASE CONNECT A5 TO 3.3V");
+  //Serial.println("SAFETY FEATURE ON PLEASE CONNECT A5 TO 3.3V");
   delay(1000);
   }
 
