@@ -1,7 +1,7 @@
 #include <Mouse.h>
 
 int EMGVal = 0;
-int EMGclick = 0;
+int EMGclick = 1.5;
 int EMGPin = A0;
 
 
@@ -18,8 +18,8 @@ void loop() {
 Serial.println(EMGVal);
 
 if (EMGVal > EMGclick) {
- // Mouse.click();
-  delay(1000);
+  Mouse.click();
+  delay(100);
 }
   }else {Serial.println("Goodbye!");delay(1000);}
  delay(1);
