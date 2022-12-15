@@ -6,8 +6,8 @@ int EMGrightval=0;
 
 //treshold values 
 int EMGclick = 1.5;
-int EMGleft=0;
-int EMGright=0;
+int EMGleft=11;
+int EMGright=11;
 
 // reminders for the names of the pins 
 // click = A0;
@@ -21,36 +21,37 @@ Serial.begin(9600);
 }
 
 void loop() {
-  //the code only runs when there is a voltage running through pin A5 
+  //the code only runs when there is a 3.3 voltage running through pin A5 (safety feature so the mouse)
+  //control can be removed from arduino back to user
   if (digitalRead(A5) ==HIGH){ 
     //reads the signals from EMG
     EMGVal = analogRead(A0);
     EMGleftval=analogRead(A1);
     EMGrightval=analogRead(A2);
     //plotting everything on one graph 
-    //Serial.print(EMGVal);
+    Serial.print(EMGVal);
     Serial.print(",");
     Serial.print(EMGleftval);
     Serial.print(",");
     Serial.println(EMGrightval);
   
-
+    // comparing the values obtained by the EMG to the threshold value and if above it an action is performed
     if (EMGVal > EMGclick) {
-      //Mouse.click();
+      Mouse.click(); //click
       delay(100);
     }
     if (EMGleftval > EMGleft){
-      Mouse.move(-40,0);
+      Mouse.move(-40,0);//moving to the left 
       delay(100);
     } 
     if(EMGrightval > EMGright){
-      Mouse.move(40,0);
+      Mouse.move(40,0);// moving to the right 
       delay(100);
     }
 
   }
   else {Serial.println("Goodbye!");
-  //Serial.println("SAFETY FEATURE ON PLEASE CONNECT A5 TO 3.3V");
+  Serial.println("SAFETY FEATURE ON PLEASE CONNECT A5 TO 3.3V");
   delay(1000);
   }
 
