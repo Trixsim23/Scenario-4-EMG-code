@@ -1,57 +1,55 @@
-// inclusion of mouse library
-#include "Mouse.h"
+#include <Mouse.h>
+//initialising variables used to store data readings and reference values 
+int EMGVal = 0;
+int EMGleftval=0;
+int EMGrightval=0;
 
-// declaration of variables
-const int up = A0;
-const int down = A1;
-const int left = A2;
-const int right = A3;
-const int clickleft = A4;
+
+
+//references
+int EMGclick = 1.5;
+int EMGleft=0;
+int EMGright=0;
+
+
+
+
+
+//initialising variabless for pins 
+int EMGPin = A0;
+
+
+
 
 void setup() {
-  Serial.begin(9600);
-  // initialize mouse control:
-  Mouse.begin();
-  
-  pinMode(up,INPUT);
-  pinMode(down,INPUT);
-  pinMode(left,INPUT);
-  pinMode(right,INPUT);
-  pinMode(clickleft,INPUT);
-  pinMode(2,INPUT);
-
+pinMode(5,INPUT);
+Serial.begin(9600);
 }
 
 void loop() {
-int sensorValue0 = analogRead(up);
-int sensorValue1 = analogRead(down);
-int sensorValue2 = analogRead(left);
-int sensorValue3 = analogRead(right);
-int sensorValue4 = analogRead(clickleft);
-  Serial.println(sensorValue4);
-  if (sensorValue0 > 600) {
-    Mouse.move(0,-40);
-    delay(1000);
-    
-  }
-  if (sensorValue1 > 600) {
-    Mouse.move(0,40);
-    delay(1000);
-  }
-  if (sensorValue2 > 600) {
-    Mouse.move(-40,0);
-    delay(1000);
-  }
-  if (sensorValue3 > 600) {
-    Mouse.move(40,0);
-    delay(1000);
-  }
-  if (sensorValue4 > 59) {
-    Mouse.click(MOUSE_LEFT);
-    delay(1000);
-    if (digitalRead(2)==HIGH){
-      Mouse.end();
+  if (digitalRead(A5) ==HIGH){ 
+    EMGVal = analogRead(A0);
+    EMGleftval=analogRead(A1);
+    EMGrightval=analogRead(A2);
+    Serial.println(EMGVal);
+
+    if (EMGVal > EMGclick) {
+      Mouse.click();
+      delay(10);
     }
+    if (EMGleftval > EMGleft){
+      Mouse.move(-40,0);
+      delay(10);
+    } 
+    if(EMGrightval > EMGright){
+      Mouse.move(40,0)
+      delay(10);
+    }
+
+  }
+  }else {Serial.println("Goodbye!");
+  Serial.print("SAFETY FEATURE ON PLEASE CONNECT A5 TO 3.3V");
+  delay(1000);
   }
 
 }
