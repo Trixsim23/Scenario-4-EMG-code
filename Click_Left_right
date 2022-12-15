@@ -4,23 +4,19 @@ int EMGVal = 0;
 int EMGleftval=0;
 int EMGrightval=0;
 
-
-
 //references
 int EMGclick = 1.5;
 int EMGleft=0;
 int EMGright=0;
 
+// reminders for the names of the pins 
+// click = A0;
+// left=A1;
+// right=A2;
 
 
 
-
-//initialising variabless for pins 
-int EMGPin = A0;
-
-
-
-
+// INITIALISING THE INPUT PINS AND TURNING ON SERIAL COMMUNICATION 
 void setup() {
 pinMode(5,INPUT);
 Serial.begin(9600);
@@ -35,19 +31,19 @@ void loop() {
 
     if (EMGVal > EMGclick) {
       Mouse.click();
-      delay(10);
+      delay(100);
     }
     if (EMGleftval > EMGleft){
       Mouse.move(-40,0);
-      delay(10);
+      delay(100);
     } 
     if(EMGrightval > EMGright){
-      Mouse.move(40,0)
-      delay(10);
+      Mouse.move(40,0);
+      delay(100);
     }
 
   }
-  }else {Serial.println("Goodbye!");
+  else {Serial.println("Goodbye!");
   Serial.print("SAFETY FEATURE ON PLEASE CONNECT A5 TO 3.3V");
   delay(1000);
   }
