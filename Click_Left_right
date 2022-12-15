@@ -4,7 +4,7 @@ int EMGVal = 0;
 int EMGleftval=0;
 int EMGrightval=0;
 
-//references
+//treshold values 
 int EMGclick = 1.5;
 int EMGleft=0;
 int EMGright=0;
@@ -14,8 +14,6 @@ int EMGright=0;
 // left=A1;
 // right=A2;
 
-
-
 // INITIALISING THE INPUT PINS AND TURNING ON SERIAL COMMUNICATION 
 void setup() {
 pinMode(5,INPUT);
@@ -23,22 +21,28 @@ Serial.begin(9600);
 }
 
 void loop() {
+  //the code only runs when there is a voltage running through pin A5 
   if (digitalRead(A5) ==HIGH){ 
+    //reads the signals from EMG
     EMGVal = analogRead(A0);
     EMGleftval=analogRead(A1);
     EMGrightval=analogRead(A2);
+    //plotting everything on one graph 
     Serial.println(EMGVal);
+    Serial.print((EMGleftval+2046));
+    Serial.print((EMGrightval+1023));
+  
 
     if (EMGVal > EMGclick) {
-      Mouse.click();
+      //Mouse.click();
       delay(100);
     }
     if (EMGleftval > EMGleft){
-      Mouse.move(-40,0);
+      //Mouse.move(-40,0);
       delay(100);
     } 
     if(EMGrightval > EMGright){
-      Mouse.move(40,0);
+      //Mouse.move(40,0);
       delay(100);
     }
 
